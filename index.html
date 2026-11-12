@@ -14,8 +14,8 @@
 <title>折線斬 星球戰記</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Noto+Sans+TC:wght@400;700&family=Noto+Serif+TC:wght@900&display=swap">
-  <script type="module" crossorigin src="./assets/index-DBmC_mlu.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-BwqPMU-k.css">
+  <script type="module" crossorigin src="./assets/index-CQZrZAPu.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-Cioj-pRG.css">
 </head>
 <body>
 <div id="hud">
@@ -60,7 +60,7 @@
         <li><b>拖曳</b><span>螢幕任意處按下就出現搖桿，拖曳移動。上坡慢、下坡快</span></li>
         <li><b class="c-dash">快速滑動</b><span>朝滑動方向衝撞，消耗 1 格體力。衝出瞬間無敵，穿過攻擊＝閃避斬</span></li>
         <li><b class="c-dash">點一下</b><span>自動鎖定最近的敵人衝撞過去</span></li>
-        <li><b class="c-guard">按住→甩出</b><span>按住不動到外圈變藍，再朝敵人甩出放開＝格擋；<span class="c-gold">發金光</span>時擋下＝完美格擋，敵人暈眩</span></li>
+        <li><b class="c-guard">按住→滑出</b><span>按住不動到外圈變藍，再朝敵人方向滑出放開＝格擋（變藍後不會誤變衝撞，滑回中心放開＝取消）；<span class="c-gold">發金光</span>時擋下＝完美格擋，敵人暈眩</span></li>
         <li><b>跳躍鈕</b><span>躍過圓環震波、滾石和箭</span></li>
         <li><b class="c-warn">黃色地面</b><span>直線＝突刺／滾石、實心圓＝砸地、圓環＝震波</span></li>
         <li><b class="c-gold">大招</b><span>右下圓鈕累積過半（白色刻度）即可點擊，時間暫停，直接在星球上劃線斬。劃越長耗越多。暈眩的敵人受雙倍傷害</span></li>
@@ -83,7 +83,7 @@
 <div id="shopOv" class="overlay" hidden>
   <div class="panel wide">
     <div class="map-top"><button id="shopBack" type="button" class="icon-btn" aria-label="返回星系地圖"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.5 4 6.5 10l6 6"/></svg></button><span class="shop-title">強化</span><span id="shopGems" class="count c-ink"></span></div>
-    <div id="shopTabs"><button type="button" data-tab="stat">能力</button><button type="button" data-tab="ult">大招</button><button type="button" data-tab="passive">被動</button></div>
+    <div id="shopTabs"><button type="button" data-tab="draw">抽卡</button><button type="button" data-tab="ult">大招</button><button type="button" data-tab="passive">被動</button></div>
     <div id="shopList"></div>
   </div>
 </div>
@@ -102,6 +102,7 @@
     <h1 class="h-md">戰敗</h1>
     <div class="stat" id="final">0</div>
     <p class="muted" id="best"></p>
+    <button id="overShop" type="button" class="shop-cta">強化史萊姆<small class="cta-hint"></small></button>
     <button id="again" type="button">再試一次</button>
     <button id="overTitle" type="button" class="ghost">回星系地圖</button>
   </div>
@@ -125,6 +126,7 @@
     <p class="muted" id="winGems"></p>
     <p class="stats" id="winStats"></p>
     <button id="nextLevel" type="button">下一關</button>
+    <button id="winShop" type="button" class="shop-cta">強化史萊姆<small class="cta-hint"></small></button>
     <button id="winAgain" type="button" class="ghost">再玩一次</button>
     <button id="winTitle" type="button" class="ghost">回星系地圖</button>
   </div>

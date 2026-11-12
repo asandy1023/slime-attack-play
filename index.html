@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#0b1030">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="折線斬">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icons/icon-192.png">
+<link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+<title>折線斬 星球戰記</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Noto+Sans+TC:wght@400;700&family=Noto+Serif+TC:wght@900&display=swap">
+  <script type="module" crossorigin src="./assets/index-DBmC_mlu.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-BwqPMU-k.css">
+</head>
+<body>
+<div id="hud">
+  <div class="hud-l">
+    <div id="dots" role="img"></div>
+    <div id="score">0</div>
+    <div id="runGems"></div>
+  </div>
+  <div id="boss" hidden><span></span><div class="bar"><i></i></div><p id="sealHint" hidden></p></div>
+  <div class="hud-r">
+    <div id="lives" role="img"></div>
+    <div id="ctrl">
+      <button id="soundBtn" class="icon-btn" type="button" aria-label="聲音開關"></button>
+      <button id="pauseBtn" class="icon-btn" type="button" aria-label="暫停" hidden><svg viewBox="0 0 20 20" fill="currentColor"><rect x="5" y="4" width="3.5" height="12" rx="1"/><rect x="11.5" y="4" width="3.5" height="12" rx="1"/></svg></button>
+    </div>
+  </div>
+</div>
+<div id="coach" hidden><span class="n"></span><b></b><p></p></div>
+<button id="skipTut" type="button" hidden>跳過教學</button>
+<div id="dock">
+  <button id="jumpBtn" type="button" aria-label="跳躍"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3 4 12h5v8h6v-8h5z"/></svg></button>
+  <div id="stam" aria-hidden="true"></div>
+</div>
+<button id="ultBtn" type="button" aria-label="大招：劃線斬"><span><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M8 38C18 34 30 22 40 9" stroke-width="5"/><path d="M14 40c9-3 19-11 27-22" stroke-width="2.4" opacity=".7"/><path d="M33 31l2 4 4 2-4 2-2 4-2-4-4-2 4-2z" fill="currentColor" stroke="none"/></svg><em>斬</em></span></button>
+<div id="joy" hidden><div class="charge"></div><span class="glbl">擋</span></div><div id="knob" hidden></div>
+<div id="sand"></div><div id="vignette"></div><div id="flash"></div><div id="ptrs" aria-hidden="true"></div>
+<div id="combo"></div><div id="tag"></div><div id="banner"></div>
+<div id="ultTip" hidden><p>時間暫停：在星球上劃線，放開發動</p><div class="inkbar"><i id="ink"></i></div></div>
+
+<div id="title" class="overlay">
+  <div class="panel">
+    <p class="sub">SLASH · PLANET · ARENA</p>
+    <h1>折線斬</h1>
+    <p class="muted">星球戰記 · 史萊姆的星球保衛戰</p>
+    <button id="start" type="button">開始冒險</button>
+    <button id="tutBtn" type="button" class="ghost" hidden>重玩教學</button>
+    <p class="muted" id="titleBest"></p>
+    <button id="logBtn" type="button" class="link" hidden>試玩紀錄</button>
+    <details>
+      <summary>操作說明</summary>
+      <ul>
+        <li><b>拖曳</b><span>螢幕任意處按下就出現搖桿，拖曳移動。上坡慢、下坡快</span></li>
+        <li><b class="c-dash">快速滑動</b><span>朝滑動方向衝撞，消耗 1 格體力。衝出瞬間無敵，穿過攻擊＝閃避斬</span></li>
+        <li><b class="c-dash">點一下</b><span>自動鎖定最近的敵人衝撞過去</span></li>
+        <li><b class="c-guard">按住→甩出</b><span>按住不動到外圈變藍，再朝敵人甩出放開＝格擋；<span class="c-gold">發金光</span>時擋下＝完美格擋，敵人暈眩</span></li>
+        <li><b>跳躍鈕</b><span>躍過圓環震波、滾石和箭</span></li>
+        <li><b class="c-warn">黃色地面</b><span>直線＝突刺／滾石、實心圓＝砸地、圓環＝震波</span></li>
+        <li><b class="c-gold">大招</b><span>右下圓鈕累積過半（白色刻度）即可點擊，時間暫停，直接在星球上劃線斬。劃越長耗越多。暈眩的敵人受雙倍傷害</span></li>
+        <li><b>鍵盤</b><span>WASD 移動、J 衝撞、K 格擋、空白鍵跳躍、L 大招、P 暫停</span></li>
+      </ul>
+    </details>
+  </div>
+</div>
+<div id="mapOv" class="overlay" hidden>
+  <div class="panel wide">
+    <div class="map-top"><button id="mapBack" type="button" class="icon-btn" aria-label="回標題"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.5 4 6.5 10l6 6"/></svg></button><span id="mapStars" class="count"></span><span id="mapGems" class="count c-ink"></span></div>
+    <div id="planets"></div>
+    <h2 id="pName"></h2>
+    <p id="pBlurb" class="muted"></p>
+    <div id="levels"></div>
+    <button id="shopBtn" type="button">強化史萊姆</button>
+    <button id="endlessBtn" type="button" class="ghost" hidden>無盡模式</button>
+  </div>
+</div>
+<div id="shopOv" class="overlay" hidden>
+  <div class="panel wide">
+    <div class="map-top"><button id="shopBack" type="button" class="icon-btn" aria-label="返回星系地圖"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.5 4 6.5 10l6 6"/></svg></button><span class="shop-title">強化</span><span id="shopGems" class="count c-ink"></span></div>
+    <div id="shopTabs"><button type="button" data-tab="stat">能力</button><button type="button" data-tab="ult">大招</button><button type="button" data-tab="passive">被動</button></div>
+    <div id="shopList"></div>
+  </div>
+</div>
+<div id="pauseOv" class="overlay" hidden>
+  <div class="panel">
+    <h1 class="h-md">暫停</h1>
+    <div class="vol"><label for="vol">音量</label><input id="vol" type="range" min="0" max="100" step="5"><output id="volN" for="vol">關</output></div>
+    <label class="vol"><span>震動回饋</span><input id="vib" type="checkbox"></label>
+    <button id="resume" type="button">繼續</button>
+    <button id="restart" type="button" class="ghost">重新開始</button>
+    <button id="toTitle" type="button" class="ghost">回星系地圖</button>
+  </div>
+</div>
+<div id="over" class="overlay" hidden>
+  <div class="panel">
+    <h1 class="h-md">戰敗</h1>
+    <div class="stat" id="final">0</div>
+    <p class="muted" id="best"></p>
+    <button id="again" type="button">再試一次</button>
+    <button id="overTitle" type="button" class="ghost">回星系地圖</button>
+  </div>
+</div>
+<div id="logOv" class="overlay" hidden>
+  <div class="panel">
+    <h1 class="h-md">試玩紀錄</h1>
+    <pre id="logText"></pre>
+    <button id="logCopy" type="button">複製全部（傳給開發者）</button>
+    <button id="logClear" type="button" class="ghost">清除紀錄</button>
+    <button id="logClose" type="button" class="ghost">返回</button>
+  </div>
+</div>
+<div id="win" class="overlay" hidden>
+  <div class="panel">
+    <p class="sub" id="winLabel">PLANET CLEARED</p>
+    <h1 class="h-md" id="winName">星球解放</h1>
+    <div id="rank">S</div>
+    <div id="winStars" class="stars"></div>
+    <div class="stat" id="winScore">0</div>
+    <p class="muted" id="winGems"></p>
+    <p class="stats" id="winStats"></p>
+    <button id="nextLevel" type="button">下一關</button>
+    <button id="winAgain" type="button" class="ghost">再玩一次</button>
+    <button id="winTitle" type="button" class="ghost">回星系地圖</button>
+  </div>
+</div>
+</body>
+</html>

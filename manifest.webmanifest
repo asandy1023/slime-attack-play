@@ -1,0 +1,17 @@
+{
+  "name": "折線斬 星球戰記",
+  "short_name": "折線斬",
+  "description": "史萊姆在小星球上衝撞、格擋，用一筆劃線斬掃平敵人。",
+  "lang": "zh-Hant",
+  "start_url": "./",
+  "scope": "./",
+  "display": "fullscreen",
+  "orientation": "any",
+  "background_color": "#0b1030",
+  "theme_color": "#0b1030",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

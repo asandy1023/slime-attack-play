@@ -1,4 +1,0 @@
-import{r as p,q as f,s as u}from"./index-kbLpn2gi.js";const s=document.createElement("div");s.style.cssText="position:fixed;z-index:20;left:8px;bottom:calc(env(safe-area-inset-bottom,0px) + 110px);font:12px/1.4 Menlo,monospace;color:#9f9;background:rgba(0,0,0,.6);padding:6px 8px;border-radius:6px;pointer-events:none;white-space:pre";document.body.append(s);let o=0,t=0,n=0,d=performance.now();const e=[];function c(a){requestAnimationFrame(c);const r=a-d;if(d=a,o++,t+=r,n=Math.max(n,r),t<1e3)return;const i=o*1e3/t;e.push(i),e.length>30&&e.shift();const l=e.reduce((m,x)=>m+x,0)/e.length;s.textContent=`fps ${i.toFixed(0)}  avg30s ${l.toFixed(0)}
-worst ${n.toFixed(1)}ms
-calls ${p.info.render.calls}  tris ${(p.info.render.triangles/1e3).toFixed(0)}k
-dpr ${f.pixelRatio}  shadow ${u.shadow.mapSize.x}`,o=0,t=0,n=0}requestAnimationFrame(c);
